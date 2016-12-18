@@ -35,17 +35,20 @@ We recommend to use python-virtualevn (virtualenv and virtualenv-wrapper)
 
 ## Features
 
- * tc_aws.loaders.s3_loader - takes a S3 key path and optional bucket name, and downloads the file through the S3 API.
- * tc_aws.loaders.presigning_loader - instead of downloading via the API, generates a signed link to the file on S3, then feeds it to the Thumbor's regular http loader.
- * tc_aws.result_storages.s3_storage
- * tc_aws.storages.s3_storage
+ * *tc_aws.loaders.s3_loader* - takes a S3 key path and optional bucket name, and downloads the file through the S3 API.
+ * *tc_aws.loaders.presigning_loader* - instead of downloading via the API, generates a signed link to the file on S3, then feeds it to the Thumbor's regular http loader. This will likely be more performant, as it avoids async issues with the boto library (see [#22](https://github.com/thumbor-community/aws/pull/22) and [#14](https://github.com/thumbor-community/aws/issues/14).
+ * *tc_aws.result_storages.s3_storage*
+ * *tc_aws.storages.s3_storage*
  
 Why use S3-specific loaders rather than just giving the S3 HTTP url to Thumbor? If your S3 files are private and you sign the urls, the query strings will vary and Thumbor will not be able to cache the image.
 
 Additional Configuration values used:
 
 ```.ini
-TC_AWS_REGION='eu-west-1' # AWS Region
+# AWS Region the bucket is located in. 
+TC_AWS_REGION='eu-west-1' 
+# A custom AWS endpoint.
+TC_AWS_ENDPOINT=''
 
 TC_AWS_STORAGE_BUCKET='' # S3 bucket for Storage
 TC_AWS_STORAGE_ROOT_PATH='' # S3 path prefix for Storage bucket
