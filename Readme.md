@@ -48,8 +48,14 @@ TC_AWS_REGION='eu-west-1' # AWS Region
 TC_AWS_STORAGE_BUCKET='' # S3 bucket for Storage
 TC_AWS_STORAGE_ROOT_PATH='' # S3 path prefix for Storage bucket
 
-TC_AWS_LOADER_BUCKET='' #S3 bucket for loader
-TC_AWS_LOADER_ROOT_PATH='' # S3 path prefix for Loader bucket
+# S3 bucket for Loader. If given, source urls are interpreted as keys
+# within this bucket. If not given, source urls are expected to contain
+# the bucket name, such as 's3-bucket/keypath'.
+TC_AWS_LOADER_BUCKET='' 
+
+# S3 path prefix for Loader bucket. If given, this is prefixed to 
+# all S3 keys.
+TC_AWS_LOADER_ROOT_PATH=''
 
 TC_AWS_RESULT_STORAGE_BUCKET='' # S3 bucket for result Storage
 TC_AWS_RESULT_STORAGE_ROOT_PATH='' # S3 path prefix for Result storage bucket
